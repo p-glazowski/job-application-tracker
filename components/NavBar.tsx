@@ -8,8 +8,8 @@ import AvatarLetter from './AvatarLetter';
 export default function NavBar() {
   const { data: session } = useSession();
   return (
-    <header className="border-b-2 border-black/10 p-4">
-      <nav className="mx-auto flex items-center justify-between">
+    <header className="border-b-2 border-black/10 p-4 ">
+      <nav className="flex items-center justify-between max-w-600 mx-auto w-full">
         <Link href={'/'}>
           <div className="font-bold text-xl text-pink-600">Job Tracker</div>
         </Link>
