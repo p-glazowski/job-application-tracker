@@ -16,9 +16,14 @@ export default function NavBar() {
         <ul className="text-gray-500 font-bold flex gap-10 items-center">
           {session ? (
             <>
+              <Link
+                href={'/dashboard/add'}
+                className="text-white bg-pink-500 p-1 px-4 rounded-md"
+              >
+                + Add job
+              </Link>
               <Link href={'/dashboard'}>
                 <div className="flex gap-4 items-center">
-                  <li>Dashboard</li>
                   {session.user?.image ? (
                     <Image
                       src={session?.user?.image}
@@ -30,8 +35,10 @@ export default function NavBar() {
                   ) : (
                     <AvatarLetter>{session.user?.name ?? 'U'}</AvatarLetter>
                   )}
+                  <li>Dashboard</li>
                 </div>
               </Link>
+
               <button
                 onClick={() => {
                   signOut({ callbackUrl: '/' });

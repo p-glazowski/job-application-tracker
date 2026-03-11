@@ -15,11 +15,11 @@ export default function StatusPage({ children, color }: Props) {
       <div className="p-8 bg-gray-100/50 flex flex-col gap-5">
         <SingleJob />
         <SingleJob />
-        <div>
+        {/*      <div>
           <button className="border border-gray-400/40 p-2 rounded-md bg-white text-gray-500 font-bold cursor-pointer text-sm">
             + Add Job
           </button>
-        </div>
+        </div> */}
       </div>
     </section>
   );
