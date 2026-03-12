@@ -1,11 +1,12 @@
+import { sendData } from '@/actions/prismaActions';
 import { SingleInput } from '@/components/form/SingleInput';
 import SingleTextArea from '@/components/form/SingleTextArea';
 
-export default function Home() {
+export default async function Home() {
   return (
     <div className="flex-1 p-4 grid place-items-center">
       <form
-        action=""
+        action={sendData}
         className="p-8 rounded-md shadow-[0px_0px_10px_0px] shadow-gray-400/50 flex flex-col gap-8 w-3/4"
       >
         <div className="flex flex-col gap-1">
@@ -24,7 +25,7 @@ export default function Home() {
           </div>
           {/* SECOND ROW */}
           <div className="flex gap-5">
-            <SingleInput id="location" req={false}>
+            <SingleInput id="location" req={true}>
               Location
             </SingleInput>
             <SingleInput id="salary" req={false} placeholder="$100k - $200k">
@@ -32,12 +33,12 @@ export default function Home() {
             </SingleInput>
           </div>
           {/* THIRD ROW */}
-          <SingleInput id="url" req={false} placeholder="https://...">
+          <SingleInput id="jobUrl" req={true} placeholder="https://...">
             Job URL
           </SingleInput>
           {/* FOURTH ROW */}
-          <SingleInput id="tags" req={false} placeholder="React, Tailwind, SQL">
-            Tags (comma-searated)
+          <SingleInput id="tags" req={true} placeholder="React, Tailwind, SQL">
+            Tags (comma-separated)
           </SingleInput>
           {/* FIFTH ROW */}
           <SingleTextArea
@@ -48,17 +49,12 @@ export default function Home() {
             Description
           </SingleTextArea>
           {/* SIXTH ROW */}
-          <SingleTextArea id="Notes" req={false}>
+          <SingleTextArea id="notes" req={false}>
             Notes
           </SingleTextArea>
         </div>
         {/* BUTTONS */}
         <div className="flex justify-end gap-3">
-          <div>
-            <button className="p-2 px-3 rounded-md border border-gray-400/50 font-bold text-gray-600">
-              Cancel
-            </button>
-          </div>
           <div>
             <button className="p-2 px-3 rounded-md bg-pink-500 text-white font-bold">
               Add Application

@@ -17,6 +17,7 @@ export function SingleInput({ children, id, req, placeholder }: Props) {
         type="text"
         name={id}
         id={id}
+        required={req}
         className="border border-gray-400/40 rounded-md p-1 px-3 outline-pink-500"
         placeholder={placeholder ? placeholder : ''}
       />
