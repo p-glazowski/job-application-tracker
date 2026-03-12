@@ -11,6 +11,8 @@ import move from '@/public/move.svg';
 import offer from '@/public/offer.svg';
 import interview from '@/public/interview.svg';
 import applied from '@/public/applied.svg';
+import { deleteJob, moveJob } from '@/actions/prismaActions';
+import { redirect } from 'next/navigation';
 
 export interface JobProps {
   company: string;
@@ -30,9 +32,39 @@ export interface JobProps {
 export default function SingleJob({ job }: { job: JobProps }) {
   const stack: string[] = job.tags.split(',');
   const [menu, setMenu] = useState(false);
+  const [deleteMenu, setDeleteMenu] = useState(false);
 
   return (
-    <div className="text-gray-500 flex flex-col gap-4 bg-white p-6 rounded-md shadow-md shadow-gray-300 py-8 relative">
+    <div className="text-gray-500 flex flex-col gap-4 bg-white p-6 rounded-md shadow-md shadow-gray-300 py-8 relative overflow-hidden">
+      {/* DELETE CONF */}
+      {deleteMenu && (
+        <div className="absolute top-0 bottom-0 right-0 left-0 backdrop-blur-[2px] z-30 grid place-items-center">
+          <div className="flex flex-col gap-2">
+            <p className="font-bold text-xl">
+              Are you sure you want to delete this job? This action cannot be
+              undone.
+            </p>
+            <div className="flex items-center justify-center gap-4">
+              <button
+                className="bg-red-500 text-white font-bold p-1 px-5 rounded-md cursor-pointer"
+                onClick={() => {
+                  setDeleteMenu(false);
+                }}
+              >
+                No
+              </button>
+              <button
+                className="bg-green-500 text-white font-bold p-1 px-5 rounded-md cursor-pointer"
+                onClick={() => {
+                  deleteJob(job.id);
+                }}
+              >
+                Yes
+              </button>
+            </div>
+          </div>
+        </div>
+      )}
       {/* MENU */}
       {menu && (
         <div className="absolute top-5 right-15 z-20 bg-white rounded-md shadow-[0px_0px_10px_0px] shadow-gray-400/60 ">
@@ -47,7 +79,12 @@ export default function SingleJob({ job }: { job: JobProps }) {
             <p className="text-xs">Move to</p>
           </button>
           {job.status !== 'applied' && (
-            <button className="flex gap-3 cursor-pointer p-2 px-3 hover:bg-pink-300/10 w-full items-center pl-6">
+            <button
+              className="flex gap-3 cursor-pointer p-2 px-3 hover:bg-pink-300/10 w-full items-center pl-6"
+              onClick={() => {
+                moveJob(job.id, 'applied');
+              }}
+            >
               <Image
                 src={applied}
                 alt="interview icon"
@@ -59,7 +96,12 @@ export default function SingleJob({ job }: { job: JobProps }) {
             </button>
           )}
           {job.status !== 'interview' && (
-            <button className="flex gap-3 cursor-pointer p-2 px-3 hover:bg-pink-300/10 w-full items-center pl-6">
+            <button
+              className="flex gap-3 cursor-pointer p-2 px-3 hover:bg-pink-300/10 w-full items-center pl-6"
+              onClick={() => {
+                moveJob(job.id, 'interview');
+              }}
+            >
               <Image
                 src={interview}
                 alt="interview icon"
@@ -71,7 +113,12 @@ export default function SingleJob({ job }: { job: JobProps }) {
             </button>
           )}
           {job.status !== 'offer' && (
-            <button className="flex gap-3 cursor-pointer p-2 px-3 hover:bg-pink-300/10 w-full items-center pl-6">
+            <button
+              className="flex gap-3 cursor-pointer p-2 px-3 hover:bg-pink-300/10 w-full items-center pl-6"
+              onClick={() => {
+                moveJob(job.id, 'offer');
+              }}
+            >
               <Image
                 src={offer}
                 alt="offer icon"
@@ -83,7 +130,12 @@ export default function SingleJob({ job }: { job: JobProps }) {
             </button>
           )}
           {job.status !== 'reject' && (
-            <button className="flex gap-3 cursor-pointer p-2 px-3 hover:bg-pink-300/10 w-full items-center pl-6">
+            <button
+              className="flex gap-3 cursor-pointer p-2 px-3 hover:bg-pink-300/10 w-full items-center pl-6"
+              onClick={() => {
+                moveJob(job.id, 'rejected');
+              }}
+            >
               <Image
                 src={reject}
                 alt="reject icon"
@@ -94,7 +146,13 @@ export default function SingleJob({ job }: { job: JobProps }) {
               <p className="text-xs">Rejected</p>
             </button>
           )}
-          <button className="flex gap-3 cursor-pointer p-2 px-3 hover:bg-pink-300/10 w-full">
+          <button
+            className="flex gap-3 cursor-pointer p-2 px-3 hover:bg-pink-300/10 w-full"
+            onClick={() => {
+              setMenu(false);
+              setDeleteMenu(true);
+            }}
+          >
             <Image
               src={trash}
               alt="trash icon"

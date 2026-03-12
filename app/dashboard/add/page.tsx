@@ -1,10 +1,11 @@
 import { sendData } from '@/actions/prismaActions';
 import { SingleInput } from '@/components/form/SingleInput';
 import SingleTextArea from '@/components/form/SingleTextArea';
+import SubmitButton from '@/components/form/SubmitButton';
 
 export default async function Home() {
   return (
-    <div className="flex-1 p-4 grid place-items-center">
+    <div className="flex-1 p-10 grid place-items-center">
       <form
         action={sendData}
         className="p-8 rounded-md shadow-[0px_0px_10px_0px] shadow-gray-400/50 flex flex-col gap-8 w-3/4"
@@ -56,9 +57,7 @@ export default async function Home() {
         {/* BUTTONS */}
         <div className="flex justify-end gap-3">
           <div>
-            <button className="p-2 px-3 rounded-md bg-pink-500 text-white font-bold">
-              Add Application
-            </button>
+            <SubmitButton>Add Application</SubmitButton>
           </div>
         </div>
       </form>

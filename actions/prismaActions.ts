@@ -1,5 +1,8 @@
+'use server';
+
 import { auth } from '@/auth';
 import { prisma } from '@/lib/prisma';
+import { revalidatePath } from 'next/cache';
 import { redirect } from 'next/navigation';
 
 export async function sendData(formData: FormData) {
@@ -24,4 +27,30 @@ export async function sendData(formData: FormData) {
 
   await prisma.job.create({ data: myData });
   redirect('/dashboard');
+}
+
+export async function moveJob(
+  id: string,
+  phase: 'applied' | 'interview' | 'offer' | 'rejected',
+) {
+  await prisma.job.update({
+    where: {
+      id: id,
+    },
+    data: {
+      status: phase,
+    },
+  });
+
+  revalidatePath('/dashbaord');
+}
+
+export async function deleteJob(id: string) {
+  await prisma.job.delete({
+    where: {
+      id: id,
+    },
+  });
+
+  revalidatePath('/dashboard');
 }
