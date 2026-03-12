@@ -4,6 +4,7 @@ import { signOut, useSession } from 'next-auth/react';
 import Image from 'next/image';
 import Link from 'next/link';
 import AvatarLetter from './AvatarLetter';
+import logo from '@/public/logo.svg';
 
 export default function NavBar() {
   const { data: session } = useSession();
@@ -11,7 +12,10 @@ export default function NavBar() {
     <header className="border-b-2 border-black/10 p-4 ">
       <nav className="flex items-center justify-between max-w-600 mx-auto w-full">
         <Link href={'/'}>
-          <div className="font-bold text-xl text-pink-600">Job Tracker</div>
+          <div className="flex items-center gap-2">
+            <Image src={logo} alt="logo" width={32} height={32} />
+            <div className="font-bold text-xl text-pink-500">Job Tracker</div>
+          </div>
         </Link>
         <ul className="text-gray-500 font-bold flex gap-10 items-center">
           {session ? (
