@@ -1,6 +1,7 @@
 import { ReactNode } from 'react';
 import SingleJob from '../SingleJob/SingleJob';
 import { prisma } from '@/lib/prisma';
+import { auth } from '@/auth';
 
 interface Props {
   children: ReactNode;
@@ -9,8 +10,11 @@ interface Props {
 }
 
 export default async function StatusPage({ children, color, status }: Props) {
+  const session = await auth();
+
   const jobs = await prisma.job.findMany({
     where: {
+      userId: session?.user?.id,
       status: status,
     },
   });
