@@ -2,7 +2,7 @@ import StatusPage from '@/components/StatusSection/StatusPage';
 
 export default function Home() {
   return (
-    <div className="flex-1 grid grid-cols-2 gap-10 p-4  max-w-600 mx-auto w-full">
+    <div className="flex-1 grid grid-cols-4 gap-10 p-4  max-w-600 mx-auto w-full">
       <StatusPage color="bg-blue-400" status="applied">
         Applied
       </StatusPage>
