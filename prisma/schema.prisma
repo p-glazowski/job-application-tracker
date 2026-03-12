@@ -73,9 +73,10 @@ model Job {
   location    String
   notes       String?
   jobUrl      String
-  description String
+  description String?
   status      String
-  salary      Int?
+  salary      String?
+  tags        String
   appliedAt   DateTime @default(now())
 
   user   User   @relation(fields: [userId], references: [id])
