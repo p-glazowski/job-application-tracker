@@ -1,6 +1,12 @@
+import { auth } from '@/auth';
 import StatusPage from '@/components/StatusSection/StatusPage';
+import { redirect } from 'next/navigation';
 
-export default function Home() {
+export default async function Home() {
+  const session = await auth();
+
+  if (!session) return redirect('/login');
+
   return (
     <div className="flex-1 grid grid-cols-4 gap-10 p-4  max-w-600 mx-auto w-full">
       <StatusPage color="bg-blue-400" status="applied">

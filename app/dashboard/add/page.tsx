@@ -1,9 +1,15 @@
 import { sendData } from '@/actions/prismaActions';
+import { auth } from '@/auth';
 import { SingleInput } from '@/components/form/SingleInput';
 import SingleTextArea from '@/components/form/SingleTextArea';
 import SubmitButton from '@/components/form/SubmitButton';
+import { redirect } from 'next/navigation';
 
 export default async function Home() {
+  const session = auth();
+
+  if (!session) return redirect('/login');
+
   return (
     <div className="flex-1 p-10 grid place-items-center">
       <form
