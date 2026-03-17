@@ -21,7 +21,7 @@ export default function SingleTextArea({
       <textarea
         name={id}
         id={id}
-        className="border border-gray-400/40 rounded-md p-2 px-3 outline-pink-500"
+        className="border border-gray-400/40 rounded-md p-2 px-3 outline-pink-500 resize-none min-h-40"
         placeholder={placeholder ? placeholder : ''}
       ></textarea>
     </div>

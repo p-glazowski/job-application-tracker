@@ -17,22 +17,28 @@ export default async function Home() {
         className="p-8 rounded-md shadow-[0px_0px_10px_0px] shadow-gray-400/50 flex flex-col gap-8 w-3/4"
       >
         <div className="flex flex-col gap-1">
-          <h1 className="text-2xl font-bold">Add Job Application</h1>
+          <h1 className="text-2xl font-bold text-pink-500">
+            Add Job Application
+          </h1>
           <p className="text-sm text-gray-500">Track a new job application</p>
         </div>
         <div className="flex flex-col gap-5">
           {/* FIRST ROW */}
           <div className="flex gap-5">
-            <SingleInput id="company" req={true}>
+            <SingleInput id="company" req={true} placeholder="Google">
               Company
             </SingleInput>
-            <SingleInput id="position" req={true}>
+            <SingleInput
+              id="position"
+              req={true}
+              placeholder="Senior Software Developer"
+            >
               Position
             </SingleInput>
           </div>
           {/* SECOND ROW */}
           <div className="flex gap-5">
-            <SingleInput id="location" req={true}>
+            <SingleInput id="location" req={true} placeholder="Warsaw, Poland">
               Location
             </SingleInput>
             <SingleInput id="salary" req={false} placeholder="$100k - $200k">
@@ -56,7 +62,11 @@ export default async function Home() {
             Description
           </SingleTextArea>
           {/* SIXTH ROW */}
-          <SingleTextArea id="notes" req={false}>
+          <SingleTextArea
+            id="notes"
+            req={false}
+            placeholder="Your own thoughts..."
+          >
             Notes
           </SingleTextArea>
         </div>
