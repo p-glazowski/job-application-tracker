@@ -24,7 +24,7 @@ export default async function StatusPage({ children, color, status }: Props) {
       <div className={`p-4 ${color} font-bold text-white`}>
         <h2>{children}</h2>
       </div>
-      <div className="p-8 flex flex-col gap-5">
+      <div className="p-8 grid grid-cols-1 gap-5">
         {jobs.map((job) => (
           <SingleJob job={job} key={job.id} />
         ))}
