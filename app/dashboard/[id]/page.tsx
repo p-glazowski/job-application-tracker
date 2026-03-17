@@ -148,9 +148,9 @@ export default async function Home({
                   </h4>
                   <Link
                     href={job.jobUrl}
-                    className="text-pink-500 w-fit underline cursor-pointer"
+                    className="text-pink-500 w-fit underline cursor-pointer underline-offset-1"
                   >
-                    {job.jobUrl}
+                    View listing
                   </Link>
                 </div>
               </div>
@@ -182,23 +182,31 @@ export default async function Home({
                   <div className="flex flex-col gap-2 w-[50%]">
                     <div className="text-sm flex justify-between">
                       <p className="text-gray-400">Company</p>
-                      <p className="text-black w-40">{job.company}</p>
+                      <p className="text-pink-500 font-bold w-40">
+                        {job.company}
+                      </p>
                     </div>
                     <div className="text-sm flex justify-between">
                       <p className="text-gray-400">Position</p>
-                      <p className="text-black w-40">{job.position}</p>
+                      <p className="text-pink-500 font-bold  w-40">
+                        {job.position}
+                      </p>
                     </div>
                     <div className="text-sm flex justify-between">
                       <p className="text-gray-400">Location</p>
-                      <p className="text-black w-40">{job.location}</p>
+                      <p className="text-pink-500 font-bold  w-40">
+                        {job.location}
+                      </p>
                     </div>
                     <div className="text-sm flex justify-between">
                       <p className="text-gray-400">Status</p>
-                      <p className="text-black w-40 capitalize">{job.status}</p>
+                      <p className="text-pink-500 font-bold  w-40 capitalize">
+                        {job.status}
+                      </p>
                     </div>
                     <div className="text-sm flex justify-between">
                       <p className="text-gray-400">Applied at</p>
-                      <p className="text-black w-40">
+                      <p className="text-pink-500 font-bold  w-40">
                         {job.appliedAt.toDateString()}
                       </p>
                     </div>
