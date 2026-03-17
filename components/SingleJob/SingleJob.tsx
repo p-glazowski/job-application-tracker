@@ -50,7 +50,9 @@ export default function SingleJob({ job }: { job: JobProps }) {
             <div className="flex items-center justify-center gap-4">
               <button
                 className="bg-red-500 text-white font-bold p-1 px-5 rounded-md cursor-pointer"
-                onClick={() => {
+                onClick={(e) => {
+                  e.stopPropagation();
+                  e.preventDefault();
                   setDeleteMenu(false);
                 }}
               >
@@ -58,7 +60,9 @@ export default function SingleJob({ job }: { job: JobProps }) {
               </button>
               <button
                 className="bg-green-500 text-white font-bold p-1 px-5 rounded-md cursor-pointer"
-                onClick={() => {
+                onClick={(e) => {
+                  e.stopPropagation();
+                  e.preventDefault();
                   deleteJob(job.id);
                 }}
               >
@@ -84,7 +88,9 @@ export default function SingleJob({ job }: { job: JobProps }) {
           {job.status !== 'applied' && (
             <button
               className="flex gap-3 cursor-pointer p-2 px-3 hover:bg-pink-300/10 w-full items-center pl-6"
-              onClick={() => {
+              onClick={(e) => {
+                e.stopPropagation();
+                e.preventDefault();
                 moveJob(job.id, 'applied');
               }}
             >
@@ -101,7 +107,9 @@ export default function SingleJob({ job }: { job: JobProps }) {
           {job.status !== 'interview' && (
             <button
               className="flex gap-3 cursor-pointer p-2 px-3 hover:bg-pink-300/10 w-full items-center pl-6"
-              onClick={() => {
+              onClick={(e) => {
+                e.stopPropagation();
+                e.preventDefault();
                 moveJob(job.id, 'interview');
               }}
             >
@@ -118,7 +126,9 @@ export default function SingleJob({ job }: { job: JobProps }) {
           {job.status !== 'offer' && (
             <button
               className="flex gap-3 cursor-pointer p-2 px-3 hover:bg-pink-300/10 w-full items-center pl-6"
-              onClick={() => {
+              onClick={(e) => {
+                e.stopPropagation();
+                e.preventDefault();
                 moveJob(job.id, 'offer');
               }}
             >
@@ -135,7 +145,9 @@ export default function SingleJob({ job }: { job: JobProps }) {
           {job.status !== 'reject' && (
             <button
               className="flex gap-3 cursor-pointer p-2 px-3 hover:bg-pink-300/10 w-full items-center pl-6"
-              onClick={() => {
+              onClick={(e) => {
+                e.stopPropagation();
+                e.preventDefault();
                 moveJob(job.id, 'rejected');
               }}
             >
@@ -151,7 +163,9 @@ export default function SingleJob({ job }: { job: JobProps }) {
           )}
           <button
             className="flex gap-3 cursor-pointer p-2 px-3 hover:bg-pink-300/10 w-full"
-            onClick={() => {
+            onClick={(e) => {
+              e.stopPropagation();
+              e.preventDefault();
               setMenu(false);
               setDeleteMenu(true);
             }}
@@ -174,7 +188,9 @@ export default function SingleJob({ job }: { job: JobProps }) {
         </div>
         <button
           className="flex flex-col text-xl cursor-pointer"
-          onClick={() => {
+          onClick={(e) => {
+            e.stopPropagation();
+            e.preventDefault();
             setMenu((pS) => !pS);
           }}
         >
