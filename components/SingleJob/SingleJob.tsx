@@ -35,7 +35,10 @@ export default function SingleJob({ job }: { job: JobProps }) {
   const [deleteMenu, setDeleteMenu] = useState(false);
 
   return (
-    <div className="text-gray-500 flex flex-col gap-4 bg-white p-6 rounded-md shadow-md shadow-gray-300 py-8 relative overflow-hidden">
+    <Link
+      href={`/dashboard/${job.id}`}
+      className="text-gray-500 flex flex-col gap-3 bg-white p-6 rounded-md shadow-md shadow-gray-300 py-8 relative overflow-hidden cursor-pointer"
+    >
       {/* DELETE CONF */}
       {deleteMenu && (
         <div className="absolute top-0 bottom-0 right-0 left-0 backdrop-blur-[2px] z-30 grid place-items-center">
@@ -166,7 +169,7 @@ export default function SingleJob({ job }: { job: JobProps }) {
       )}
       <div className="flex flex-row justify-between">
         <div>
-          <h3 className="text-black text-xl">{job.position}</h3>
+          <h3 className="text-black text-sm">{job.position}</h3>
           <p className="font-bold text-pink-500 text-2xl">{job.company}</p>
         </div>
         <button
@@ -184,7 +187,7 @@ export default function SingleJob({ job }: { job: JobProps }) {
           <StackBubble key={i}>{item}</StackBubble>
         ))}
       </div>
-      <div className="w-fit">
+      {/*       <div className="w-fit">
         <Link href={job.jobUrl} target="_blank">
           <Image
             src={link}
@@ -194,7 +197,7 @@ export default function SingleJob({ job }: { job: JobProps }) {
             className="opacity-60"
           />
         </Link>
-      </div>
-    </div>
+      </div> */}
+    </Link>
   );
 }
