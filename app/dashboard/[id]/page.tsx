@@ -153,6 +153,7 @@ export default async function Home({
                     Application website
                   </h4>
                   <Link
+                    target="_blank"
                     href={job.jobUrl}
                     className="text-pink-500 w-fit underline cursor-pointer underline-offset-1"
                   >
