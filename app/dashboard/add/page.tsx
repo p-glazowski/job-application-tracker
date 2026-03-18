@@ -6,7 +6,8 @@ import SubmitButton from '@/components/form/SubmitButton';
 import { redirect } from 'next/navigation';
 
 export default async function Home() {
-  const session = auth();
+  const session = await auth();
+  console.log(session);
 
   if (!session) return redirect('/login');
 

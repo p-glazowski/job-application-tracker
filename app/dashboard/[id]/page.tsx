@@ -213,9 +213,12 @@ export default async function Home({
                   </div>
                 </div>
                 <div className="flex justify-end">
-                  <button className="bg-pink-500 text-white p-1 px-4 rounded-md cursor-pointer">
+                  <Link
+                    href={`/dashboard/${id}/edit`}
+                    className="bg-pink-500 text-white p-1 px-4 rounded-md cursor-pointer"
+                  >
                     Edit your application
-                  </button>
+                  </Link>
                 </div>
               </div>
             </div>
