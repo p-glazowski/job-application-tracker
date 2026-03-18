@@ -24,6 +24,23 @@ export default async function Home() {
           <p className="text-sm text-gray-500">Track a new job application</p>
         </div>
         <div className="flex flex-col gap-5">
+          {/* STATUS */}
+          <div className="flex flex-col gap-1 w-fit">
+            <label htmlFor="status" className="text-sm font-bold text-gray-500">
+              Status <span className="text-pink-500">*</span>
+            </label>
+            <select
+              id="status"
+              name="status"
+              defaultValue="applied"
+              className="border border-gray-300 rounded-md p-1 px-3 text-black outline-none focus:border-pink-400 w-full"
+            >
+              <option value="applied">Applied</option>
+              <option value="interview">Interview</option>
+              <option value="offer">Offer</option>
+              <option value="rejected">Rejected</option>
+            </select>
+          </div>
           {/* FIRST ROW */}
           <div className="flex gap-5">
             <SingleInput id="company" req={true} placeholder="Google">

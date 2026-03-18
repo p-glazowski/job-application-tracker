@@ -14,7 +14,7 @@ export async function sendData(formData: FormData) {
 
   const myData = {
     userId: userId,
-    status: 'applied',
+    status: formData.get('status') as string,
     company: formData.get('company') as string,
     position: formData.get('position') as string,
     location: formData.get('location') as string,
