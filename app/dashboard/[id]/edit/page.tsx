@@ -1,11 +1,17 @@
 import Link from 'next/link';
 import EditForm from './EditForm';
+import { auth } from '@/auth';
+import { redirect } from 'next/navigation';
 
 export default async function Home({
   params,
 }: {
   params: Promise<{ id: string }>;
 }) {
+  const session = await auth();
+
+  if (!session) return redirect('/login');
+
   const { id } = await params;
 
   return (

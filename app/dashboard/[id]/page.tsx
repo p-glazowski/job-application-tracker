@@ -1,13 +1,19 @@
+import { auth } from '@/auth';
 import StackBubble from '@/components/SingleJob/StackBubble';
 import { prisma } from '@/lib/prisma';
 import clsx from 'clsx';
 import Link from 'next/link';
+import { redirect } from 'next/navigation';
 
 export default async function Home({
   params,
 }: {
   params: Promise<{ id: string }>;
 }) {
+  const session = await auth();
+
+  if (!session) return redirect('/login');
+
   const { id } = await params;
 
   const job = await prisma.job.findUnique({
