@@ -9,25 +9,27 @@ export default async function Home() {
 
   return (
     <div className="flex-1">
-      <section className="my-25 text-center max-w-200 mx-auto grid gap-4">
-        <h1 className="text-6xl font-bold">
-          A better way to track your{' '}
-          <span className="text-pink-500">job applications</span>
-        </h1>
-        <p className="text-gray-500">
-          Capture, organize and manage your job search in one place.
-        </p>
-        <div className="mt-5">
-          <Link
-            href={session ? '/dashboard' : '/login'}
-            className="bg-pink-500 rounded-md p-2 px-6 text-white font-bold cursor-pointer hover:bg-pink-600"
-          >
-            Start right now!
-          </Link>
+      <section className="h-dvh grid place-items-center">
+        <div className="text-center max-w-200 mx-auto grid gap-4 -mt-20">
+          <h1 className="text-6xl font-bold">
+            A better way to track your{' '}
+            <span className="text-pink-500">job applications</span>
+          </h1>
+          <p className="text-gray-500">
+            Capture, organize and manage your job search in one place.
+          </p>
+          <div className="mt-5">
+            <Link
+              href={session ? '/dashboard' : '/login'}
+              className="bg-pink-500 rounded-md p-4 px-10 text-white font-bold cursor-pointer hover:bg-pink-600"
+            >
+              Start right now!
+            </Link>
+          </div>
+          <p className="text-gray-400 text-xs mt-2">
+            Free forever. No credit card required.
+          </p>
         </div>
-        <p className="text-gray-400 text-xs">
-          Free forever. No credit card required.
-        </p>
       </section>
       <div className="border-b-2 border-black/10"></div>
       <ScreenSection />
