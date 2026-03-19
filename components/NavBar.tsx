@@ -6,6 +6,8 @@ import Link from 'next/link';
 import AvatarLetter from './AvatarLetter';
 import logo from '@/public/logo.svg';
 import { useState, useEffect, useRef } from 'react';
+import { AnimatePresence } from 'motion/react';
+import { motion } from 'motion/react';
 
 export default function NavBar() {
   const { data: session } = useSession();
@@ -48,29 +50,37 @@ export default function NavBar() {
               </Link>
               <div className="relative" ref={menuRef}>
                 {/* MENU */}
-                {menu && (
-                  <div className="bg-white py-3 px-5 absolute -bottom-29 -left-49.5 rounded-md shadow-[0px_0px_10px_0px] shadow-gray-400 w-fit">
-                    <ul className="text-sm flex flex-col gap-4">
-                      <li className="flex flex-col gap-2">
-                        <span className="text-pink-500">
-                          {session.user?.name}
-                        </span>
-                        <span className="text-xs">{session.user?.email}</span>
-                      </li>
-                      <div className="border-b-2 border-gray-400/30 -my-1"></div>
-                      <li>
-                        <button
-                          onClick={() => {
-                            signOut({ callbackUrl: '/' });
-                          }}
-                          className="cursor-pointer hover:text-pink-500"
-                        >
-                          Sign Out
-                        </button>
-                      </li>
-                    </ul>
-                  </div>
-                )}
+                <AnimatePresence>
+                  {menu && (
+                    <motion.div
+                      className="bg-white py-3 px-5 absolute -bottom-29 -left-49.5 rounded-md shadow-[0px_0px_10px_0px] shadow-gray-400 w-fit"
+                      initial={{ opacity: 0, y: 10 }}
+                      animate={{ opacity: 1, y: 0 }}
+                      exit={{ opacity: 0, y: -10 }}
+                      transition={{ duration: 0.25, ease: 'easeInOut' }}
+                    >
+                      <ul className="text-sm flex flex-col gap-4">
+                        <li className="flex flex-col gap-2">
+                          <span className="text-pink-500">
+                            {session.user?.name}
+                          </span>
+                          <span className="text-xs">{session.user?.email}</span>
+                        </li>
+                        <div className="border-b-2 border-gray-400/30 -my-1"></div>
+                        <li>
+                          <button
+                            onClick={() => {
+                              signOut({ callbackUrl: '/' });
+                            }}
+                            className="cursor-pointer hover:text-pink-500"
+                          >
+                            Sign Out
+                          </button>
+                        </li>
+                      </ul>
+                    </motion.div>
+                  )}
+                </AnimatePresence>
                 <button
                   className="cursor-pointer flex justify-center"
                   onClick={() => {
