@@ -10,7 +10,9 @@ import move from '@/public/move.svg';
 import offer from '@/public/offer.svg';
 import interview from '@/public/interview.svg';
 import applied from '@/public/applied.svg';
+import edit from '@/public/edit.svg';
 import { deleteJob, moveJob } from '@/actions/prismaActions';
+import { redirect } from 'next/navigation';
 
 export interface JobProps {
   company: string;
@@ -49,12 +51,18 @@ export default function SingleJob({ job }: { job: JobProps }) {
   return (
     <Link
       href={`/dashboard/${job.id}`}
-      className="text-gray-500 bg-white p-6 rounded-md shadow-md shadow-gray-300 py-8 relative overflow-hidden cursor-pointer"
+      className="text-gray-500 bg-white p-6 rounded-md shadow-md shadow-gray-300 py-8 relative cursor-pointer hover:shadow-pink-500/30"
     >
       <div ref={menuRef} className="flex flex-col gap-3">
         {/* DELETE CONF */}
         {deleteMenu && (
-          <div className="absolute top-0 bottom-0 right-0 left-0 backdrop-blur-[2px] z-30 grid place-items-center">
+          <div
+            className="absolute top-0 bottom-0 right-0 left-0 backdrop-blur-[2px] z-30 grid place-items-center p-4 bg-black/70 text-white rounded-md"
+            onClick={(e) => {
+              e.stopPropagation();
+              e.preventDefault();
+            }}
+          >
             <div className="flex flex-col gap-2">
               <p className="font-bold text-xl">
                 Are you sure you want to delete this job? This action cannot be
@@ -87,7 +95,7 @@ export default function SingleJob({ job }: { job: JobProps }) {
         )}
         {/* MENU */}
         {menu && (
-          <div className="absolute top-5 right-15 z-20 bg-white rounded-md shadow-[0px_0px_10px_0px] shadow-gray-400/60 ">
+          <div className="absolute top-5 right-15 z-20 bg-white rounded-md shadow-[0px_0px_10px_0px] shadow-gray-400/60">
             <button className="flex gap-3 p-2 px-3 w-full items-center">
               <Image
                 src={move}
@@ -174,6 +182,23 @@ export default function SingleJob({ job }: { job: JobProps }) {
                 <p className="text-xs">Rejected</p>
               </button>
             )}
+            <button
+              className="flex gap-3 cursor-pointer p-2 px-3 hover:bg-pink-300/10 w-full"
+              onClick={(e) => {
+                e.stopPropagation();
+                e.preventDefault();
+                redirect(`/dashboard/${job.id}/edit`);
+              }}
+            >
+              <Image
+                src={edit}
+                alt="trash icon"
+                width={16}
+                height={16}
+                loading="eager"
+              />
+              <p className="text-xs">Edit Job</p>
+            </button>
             <button
               className="flex gap-3 cursor-pointer p-2 px-3 hover:bg-pink-300/10 w-full"
               onClick={(e) => {

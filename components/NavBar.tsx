@@ -24,7 +24,7 @@ export default function NavBar() {
   }, []);
 
   return (
-    <header className="border-b-2 border-black/10 p-4 ">
+    <header className="border-b-2 border-black/10 p-4">
       <nav className="flex items-center justify-between max-w-600 mx-auto w-full">
         <Link href={'/'}>
           <div className="flex items-end gap-2">

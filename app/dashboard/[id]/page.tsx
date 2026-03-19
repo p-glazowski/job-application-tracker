@@ -75,14 +75,14 @@ export default async function Home({
   }
 
   return (
-    <div className="flex-1 bg-gray-200">
-      <div className="mt-2 pl-10 text-gray-500 underline -mb-2 underline-offset-2">
+    <div className="flex-1 bg-gray-200 flex flex-col">
+      <div className="px-4 py-2 text-gray-500 underline underline-offset-2 max-w-600 w-full mx-auto">
         <Link href={'/dashboard'} className="">
           ← Go back
         </Link>
       </div>
-      <div className="p-10 py-5">
-        <div className="bg-white w-full rounded-md overflow-hidden">
+      <div className="p-10 py-5 flex-1 grid">
+        <div className="bg-white w-full rounded-md overflow-hidden max-w-300 mx-auto">
           <div className={clsx(`h-4 w-full ${getBgColor()}`)}></div>
           <section className="p-6">
             <div className="flex justify-between">
@@ -97,17 +97,27 @@ export default async function Home({
                   </h3>
                 </div>
               </div>
-              <div className="flex flex-col gap-2 items-end">
-                <div
-                  className={clsx(
-                    `${getBubbleColors()} rounded-[10rem] p-1 px-4 capitalize`,
-                  )}
-                >
-                  {job.status}
+              <div className="flex flex-col gap-2 items-end justify-between">
+                <div className="flex flex-col gap-2 items-end">
+                  <div
+                    className={clsx(
+                      `${getBubbleColors()} rounded-[10rem] p-1 px-4 capitalize`,
+                    )}
+                  >
+                    {job.status}
+                  </div>
+                  <p className="text-xs text-gray-500">
+                    Applied @ {job.appliedAt.toDateString()}
+                  </p>
                 </div>
-                <p className="text-xs text-gray-500">
-                  Applied @ {job.appliedAt.toDateString()}
-                </p>
+                <div className="flex justify-end">
+                  <Link
+                    href={`/dashboard/${id}/edit`}
+                    className="bg-pink-500 text-white p-1 px-4 rounded-md cursor-pointer hover:bg-white hover:text-pink-500 hover:shadow-[0px_0px_0px_2px] hover:shadow-pink-500"
+                  >
+                    Edit your application
+                  </Link>
+                </div>
               </div>
             </div>
             <div className="border-b-2 border-gray-400/30 my-10"></div>
@@ -181,7 +191,7 @@ export default async function Home({
                     </div>
                   </div>
                 </div>
-              </div> */}
+                </div> */}
                 {/* QUICK INFO */}
                 <div className="p-4 bg-pink-100 text-pink-500 rounded-md">
                   <h4 className="text-sm font-bold">Quick info</h4>
@@ -218,14 +228,6 @@ export default async function Home({
                       </p>
                     </div>
                   </div>
-                </div>
-                <div className="flex justify-end">
-                  <Link
-                    href={`/dashboard/${id}/edit`}
-                    className="bg-pink-500 text-white p-1 px-4 rounded-md cursor-pointer"
-                  >
-                    Edit your application
-                  </Link>
                 </div>
               </div>
             </div>

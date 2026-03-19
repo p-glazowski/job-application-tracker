@@ -9,7 +9,7 @@ export default async function Home() {
 
   return (
     <div className="flex-1">
-      <section className="my-20 text-center max-w-200 mx-auto grid gap-4">
+      <section className="my-25 text-center max-w-200 mx-auto grid gap-4">
         <h1 className="text-6xl font-bold">
           A better way to track your{' '}
           <span className="text-pink-500">job applications</span>
