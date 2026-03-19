@@ -4,12 +4,9 @@
   box-sizing: border-box;
 }
 
-html {
-  overscroll-behavior: none;
-}
-
 body {
   min-height: 100vh;
+  -webkit-font-smoothing: antialiased;
 }
 
 button {
