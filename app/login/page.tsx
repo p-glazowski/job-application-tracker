@@ -1,4 +1,6 @@
+// app/login/page.tsx
 import LoginButton from '@/components/Login/LoginButton';
+import DemoLogin from '@/components/Login/DemoLogin';
 
 export default function Home() {
   return (
@@ -13,6 +15,15 @@ export default function Home() {
         <div className="flex flex-col gap-5 mt-10">
           <LoginButton image="/google.png" provider="Google" />
           <LoginButton image="/githubb.png" provider="Github" />
+
+          {/* DIVIDER */}
+          <div className="flex items-center gap-3">
+            <div className="flex-1 border-t border-gray-300/60" />
+            <p className="text-xs text-gray-400">or</p>
+            <div className="flex-1 border-t border-gray-300/60" />
+          </div>
+
+          <DemoLogin />
         </div>
       </div>
     </div>
