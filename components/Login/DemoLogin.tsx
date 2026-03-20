@@ -5,13 +5,16 @@ import { useState } from 'react';
 
 export default function DemoLogin() {
   const [name, setName] = useState('');
+  const [loading, setLoading] = useState(false);
 
   async function handleDemoLogin(e: React.FormEvent) {
     e.preventDefault();
+    setLoading(true);
     await signIn('credentials', {
       name,
       callbackUrl: '/dashboard',
     });
+    setLoading(false);
   }
 
   return (
@@ -26,13 +29,15 @@ export default function DemoLogin() {
         onChange={(e) => setName(e.target.value.replace(/[^a-zA-Z\s]/g, ''))}
         minLength={2}
         required
-        className="border border-gray-400/50 rounded-md p-3 text-sm outline-none focus:border-pink-400"
+        disabled={loading}
+        className="border border-gray-400/50 rounded-md p-3 text-sm outline-none focus:border-pink-400 disabled:opacity-50"
       />
       <button
         type="submit"
-        className="border border-pink-500 text-pink-500 rounded-md p-3 cursor-pointer hover:bg-pink-500 hover:text-white font-bold text-sm"
+        disabled={loading}
+        className="border border-pink-500 text-pink-500 rounded-md p-3 cursor-pointer hover:bg-pink-500 hover:text-white font-bold text-sm disabled:opacity-50 disabled:cursor-not-allowed"
       >
-        Try Demo
+        {loading ? 'Logging in...' : 'Try Demo'}
       </button>
     </form>
   );
