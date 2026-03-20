@@ -5,8 +5,8 @@ import progress from '@/public/progress.svg';
 
 export default function PerksSection() {
   return (
-    <section className="flex flex-col items-center my-20 max-w-250 mx-auto">
-      <div className="flex w-full justify-between gap-5 items-center">
+    <section className="flex flex-col items-center my-10 max-w-250 mx-auto">
+      <div className="flex w-full justify-between gap-10 items-center flex-col md:flex-row">
         <SinglePerk
           image={orginize}
           title="Stay Orginized"

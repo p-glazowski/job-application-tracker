@@ -1,5 +1,10 @@
 @import 'tailwindcss';
 
+@theme {
+  /* BREAKPOINTS */
+  --breakpoint-lg: 1200px;
+}
+
 * {
   box-sizing: border-box;
 }

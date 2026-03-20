@@ -34,7 +34,89 @@ export default function NavBar() {
             <p className="font-bold text-xl text-pink-500">Job Tracker</p>
           </div>
         </Link>
-        <ul className="text-gray-500 font-bold flex gap-10 items-center">
+        {/* MOBILE VERSION */}
+        <ul className="text-gray-500 font-bold gap-4 items-center flex md:hidden">
+          {session ? (
+            <>
+              <Link
+                href={'/dashboard/add'}
+                className="text-white bg-pink-500 p-1 px-4 rounded-md hover:bg-pink-200 hover:text-pink-500"
+              >
+                + Add job
+              </Link>
+              <div className="relative z-20" ref={menuRef}>
+                {/* MENU */}
+                <AnimatePresence>
+                  {menu && (
+                    <motion.div
+                      className="bg-white py-3 px-5 absolute -bottom-44 -left-49.5 rounded-md shadow-[0px_0px_10px_0px] shadow-gray-400 w-fit z-20"
+                      initial={{ opacity: 0, y: 10 }}
+                      animate={{ opacity: 1, y: 0 }}
+                      exit={{ opacity: 0, y: -10 }}
+                      transition={{ duration: 0.25, ease: 'easeInOut' }}
+                    >
+                      <ul className="text-sm flex flex-col gap-4">
+                        <li className="flex flex-col gap-2">
+                          <span className="text-pink-500">
+                            {session.user?.name}
+                          </span>
+                          <span className="text-xs">{session.user?.email}</span>
+                        </li>
+                        <div className="border-b-2 border-gray-400/30 -my-1"></div>
+                        <li
+                          onClick={() => {
+                            setMenu(false);
+                          }}
+                        >
+                          <Link
+                            href={'/dashboard'}
+                            className="flex gap-4 items-center cursor-pointer text-white bg-pink-500 p-2 px-2 rounded-md"
+                          >
+                            Dashboard
+                          </Link>
+                        </li>
+                        <li>
+                          <button
+                            onClick={() => {
+                              signOut({ callbackUrl: '/' });
+                            }}
+                            className="cursor-pointer hover:text-pink-500 px-2"
+                          >
+                            Sign Out
+                          </button>
+                        </li>
+                      </ul>
+                    </motion.div>
+                  )}
+                </AnimatePresence>
+                <button
+                  className="cursor-pointer flex justify-center"
+                  onClick={() => {
+                    setMenu((pS) => !pS);
+                  }}
+                >
+                  {session.user?.image ? (
+                    <Image
+                      src={session?.user?.image}
+                      alt={`${session?.user?.name} avatar`}
+                      width={32}
+                      height={32}
+                      className="rounded-[50%]"
+                    />
+                  ) : (
+                    <AvatarLetter>{session.user?.name ?? 'U'}</AvatarLetter>
+                  )}
+                </button>
+              </div>
+            </>
+          ) : (
+            <Link href={'/login'}>
+              <li>Sign In</li>
+            </Link>
+          )}
+        </ul>
+        {/* PC VERSION */}
+        <ul className="text-gray-500 font-bold gap-10 items-center hidden md:flex">
           {session ? (
             <>
               <Link
@@ -48,7 +130,7 @@ export default function NavBar() {
                   <li>Dashboard</li>
                 </div>
               </Link>
-              <div className="relative" ref={menuRef}>
+              <div className="relative z-20" ref={menuRef}>
                 {/* MENU */}
                 <AnimatePresence>
                   {menu && (
@@ -100,15 +182,6 @@ export default function NavBar() {
                   )}
                 </button>
               </div>
-
-              {/*   <button
-                onClick={() => {
-                  signOut({ callbackUrl: '/' });
-                }}
-                className="cursor-pointer"
-              >
-                Sign Out
-              </button> */}
             </>
           ) : (
             <Link href={'/login'}>

@@ -8,12 +8,12 @@ export default async function Home() {
   const session = await auth();
 
   return (
-    <div className="flex-1">
-      <section className="h-dvh grid place-items-center">
-        <div className="text-center max-w-200 mx-auto grid gap-4 -mt-20">
-          <h1 className="text-6xl font-bold">
+    <div className="flex-1 flex flex-col justify-between">
+      <div>
+        <section className="text-center grid gap-4 p-4 py-15 md:py-40">
+          <h1 className="text-5xl font-bold md:text-6xl">
             A better way to track your{' '}
-            <span className="text-pink-500">job applications</span>
+            <span className="text-pink-500 block">job applications</span>
           </h1>
           <p className="text-gray-500">
             Capture, organize and manage your job search in one place.
@@ -29,12 +29,12 @@ export default async function Home() {
           <p className="text-gray-400 text-xs mt-2">
             Free forever. No credit card required.
           </p>
-        </div>
-      </section>
-      <div className="border-b-2 border-black/10"></div>
-      <ScreenSection />
-      <div className="border-b-2 border-black/10"></div>
-      <PerksSection />
+        </section>
+        <div className="border-b-2 border-black/10"></div>
+        <ScreenSection />
+        <div className="border-b-2 border-black/10"></div>
+        <PerksSection />
+      </div>
       <Footer />
     </div>
   );

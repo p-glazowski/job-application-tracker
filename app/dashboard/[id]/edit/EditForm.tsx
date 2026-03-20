@@ -18,10 +18,10 @@ export default async function EditForm({ id }: Props) {
   const updateJobWithId = updateJob.bind(null, id);
 
   return (
-    <div className=" p-10 grid place-items-center">
+    <div className="p-4 md:grid md:place-items-center">
       <form
         action={updateJobWithId}
-        className="p-8 rounded-md shadow-[0px_0px_10px_0px] shadow-gray-400/50 flex flex-col gap-8 w-3/4"
+        className="p-8 rounded-md shadow-[0px_0px_10px_0px] shadow-gray-400/50 flex flex-col gap-8 md:w-3/4"
       >
         <div className="flex flex-col gap-1">
           <h1 className="text-2xl font-bold text-pink-500">
@@ -50,7 +50,7 @@ export default async function EditForm({ id }: Props) {
             </select>
           </div>
           {/* FIRST ROW */}
-          <div className="flex gap-5">
+          <div className="flex gap-5 flex-col md:flex-row">
             <SingleInput
               id="company"
               req={true}
@@ -69,7 +69,7 @@ export default async function EditForm({ id }: Props) {
             </SingleInput>
           </div>
           {/* SECOND ROW */}
-          <div className="flex gap-5">
+          <div className="flex gap-5 flex-col md:flex-row">
             <SingleInput
               id="location"
               req={true}

@@ -28,10 +28,10 @@ export default function ScreenSection() {
   }
 
   return (
-    <section className="flex flex-col items-center my-20 max-w-200 mx-auto">
-      <div className="flex gap-5">
+    <section className="flex flex-col items-center my-10 max-w-200 mx-auto p-5">
+      <div className="flex gap-5 text-sm">
         <button
-          className={`text-white p-1 px-4 rounded-md ${image === 1 ? 'bg-pink-500' : 'bg-gray-400'} hover:opacity-80 cursor-pointer`}
+          className={`text-white p-1 px-1 rounded-md ${image === 1 ? 'bg-pink-500' : 'bg-gray-400'} hover:opacity-80 cursor-pointer`}
           onClick={() => {
             changeImage(1);
           }}
@@ -39,7 +39,7 @@ export default function ScreenSection() {
           Organize applications
         </button>
         <button
-          className={`text-white p-1 px-4 rounded-md ${image === 2 ? 'bg-pink-500' : 'bg-gray-400'} hover:opacity-80 cursor-pointer`}
+          className={`text-white p-1 px-2 rounded-md ${image === 2 ? 'bg-pink-500' : 'bg-gray-400'} hover:opacity-80 cursor-pointer`}
           onClick={() => {
             changeImage(2);
           }}
@@ -47,7 +47,7 @@ export default function ScreenSection() {
           Get hired
         </button>
         <button
-          className={`text-white p-1 px-4 rounded-md ${image === 3 ? 'bg-pink-500' : 'bg-gray-400'} hover:opacity-80 cursor-pointer`}
+          className={`text-white p-1 px-2 rounded-md ${image === 3 ? 'bg-pink-500' : 'bg-gray-400'} hover:opacity-80 cursor-pointer`}
           onClick={() => {
             changeImage(3);
           }}
@@ -70,7 +70,7 @@ export default function ScreenSection() {
               alt="Main ss"
               width={1000}
               height={1000}
-              className="w-full h-full object-cover"
+              className="w-full h-full object-cover lg:object-contain  object-left lg:object-center"
             />
           </div>
         </motion.div>

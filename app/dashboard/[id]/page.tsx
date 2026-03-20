@@ -81,14 +81,14 @@ export default async function Home({
           ← Go back
         </Link>
       </div>
-      <div className="p-10 py-5 flex-1 grid">
+      <div className="p-4 py-2 flex-1 grid md:py-5 md:p-10">
         <div className="bg-white w-full rounded-md overflow-hidden max-w-300 mx-auto">
           <div className={clsx(`h-4 w-full ${getBgColor()}`)}></div>
           <section className="p-6">
-            <div className="flex justify-between">
-              <div className="flex flex-col gap-4">
+            <div className="flex justify-between flex-col gap-8 md:flex-row">
+              <div className="flex flex-col gap-1 md:gap-3">
                 <h1 className="text-xl text-gray-500">{job.position}</h1>
-                <h2 className="text-2xl text-pink-500 font-bold">
+                <h2 className="text-2xl text-pink-500 font-bold leading-7">
                   {job.company}
                 </h2>
                 <div className="mt-3">
@@ -97,11 +97,11 @@ export default async function Home({
                   </h3>
                 </div>
               </div>
-              <div className="flex flex-col gap-2 items-end justify-between">
-                <div className="flex flex-col gap-2 items-end">
+              <div className="flex flex-col gap-4 md:items-end md:justify-between">
+                <div className="flex flex-col gap-2 md:items-end">
                   <div
                     className={clsx(
-                      `${getBubbleColors()} rounded-[10rem] p-1 px-4 capitalize`,
+                      `${getBubbleColors()} rounded-[10rem] p-1 px-6 capitalize w-fit`,
                     )}
                   >
                     {job.status}
@@ -110,7 +110,7 @@ export default async function Home({
                     Applied @ {job.appliedAt.toDateString()}
                   </p>
                 </div>
-                <div className="flex justify-end">
+                <div className="hidden md:flex items-end">
                   <Link
                     href={`/dashboard/${id}/edit`}
                     className="bg-pink-500 text-white p-1 px-4 rounded-md cursor-pointer hover:bg-white hover:text-pink-500 hover:shadow-[0px_0px_0px_2px] hover:shadow-pink-500"
@@ -120,14 +120,14 @@ export default async function Home({
                 </div>
               </div>
             </div>
-            <div className="border-b-2 border-gray-400/30 my-10"></div>
-            <div className="flex gap-20 justify-between">
+            <div className="border-b-2 border-gray-400/30 md:my-8 mt-2 mb-8"></div>
+            <div className="flex gap-20 justify-between flex-col lg:flex-row">
               <div className="flex-1 flex flex-col gap-6">
                 {/* SALARY */}
                 <div className="flex flex-col gap-2">
                   <h4 className="text-gray-400 text-sm font-bold">Salary</h4>
                   <p className="p-2 px-5 rounded-md text-green-600 bg-green-200 w-fit">
-                    {job.salary} / month
+                    {!job.salary ? 'Not disclosed' : job.salary}
                   </p>
                 </div>
                 {/* TAGS */}
@@ -145,7 +145,11 @@ export default async function Home({
                 <div className="flex flex-col gap-2">
                   <h4 className="text-gray-400 text-sm font-bold">Notes</h4>
                   <p className="bg-gray-200 text-sm p-6 rounded-md">
-                    {job.notes}
+                    {!job.notes ? (
+                      <span className="text-gray-400 italic">Not provided</span>
+                    ) : (
+                      job.notes
+                    )}
                   </p>
                 </div>
                 {/* DESC */}
@@ -154,7 +158,11 @@ export default async function Home({
                     Description
                   </h4>
                   <p className="bg-gray-200 text-sm p-6 rounded-md">
-                    {job.description}
+                    {!job.description ? (
+                      <span className="text-gray-400 italic">Not provided</span>
+                    ) : (
+                      job.description
+                    )}
                   </p>
                 </div>
                 {/* WEBSITE */}
@@ -172,7 +180,7 @@ export default async function Home({
                 </div>
               </div>
               {/* RIGHT SIDE */}
-              <div className="flex-1 flex flex-col gap-20 justify-between">
+              <div className="flex-1 flex flex-col gap-10 justify-between">
                 {/* APP TIMELINE SOON FEEATURE */}
                 {/*   <div className="flex flex-col gap-2">
                 <h4 className="text-gray-400 text-sm font-bold">
@@ -196,38 +204,46 @@ export default async function Home({
                 <div className="p-4 bg-pink-100 text-pink-500 rounded-md">
                   <h4 className="text-sm font-bold">Quick info</h4>
                   <div className="border border-pink-400/20 my-5"></div>
-                  <div className="flex flex-col gap-2 w-[50%]">
+                  <div className="flex flex-col gap-2 w-full">
                     <div className="text-sm flex justify-between">
                       <p className="text-gray-400">Company</p>
-                      <p className="text-pink-500 font-bold w-40">
+                      <p className="text-pink-500 font-bold w-40 text-right lg:flex-1">
                         {job.company}
                       </p>
                     </div>
                     <div className="text-sm flex justify-between">
                       <p className="text-gray-400">Position</p>
-                      <p className="text-pink-500 font-bold  w-40">
+                      <p className="text-pink-500 font-bold w-40 text-right lg:flex-1">
                         {job.position}
                       </p>
                     </div>
                     <div className="text-sm flex justify-between">
                       <p className="text-gray-400">Location</p>
-                      <p className="text-pink-500 font-bold  w-40">
+                      <p className="text-pink-500 font-bold w-40 text-right lg:flex-1">
                         {job.location}
                       </p>
                     </div>
                     <div className="text-sm flex justify-between">
                       <p className="text-gray-400">Status</p>
-                      <p className="text-pink-500 font-bold  w-40 capitalize">
+                      <p className="text-pink-500 font-bold w-40 capitalize text-right lg:flex-1">
                         {job.status}
                       </p>
                     </div>
                     <div className="text-sm flex justify-between">
                       <p className="text-gray-400">Applied at</p>
-                      <p className="text-pink-500 font-bold  w-40">
+                      <p className="text-pink-500 font-bold w-40 text-right lg:flex-1">
                         {job.appliedAt.toDateString()}
                       </p>
                     </div>
                   </div>
+                </div>
+                <div className="block md:hidden">
+                  <Link
+                    href={`/dashboard/${id}/edit`}
+                    className="bg-pink-500 text-white p-1 px-4 rounded-md cursor-pointer hover:bg-white hover:text-pink-500 hover:shadow-[0px_0px_0px_2px] hover:shadow-pink-500"
+                  >
+                    Edit your application
+                  </Link>
                 </div>
               </div>
             </div>
