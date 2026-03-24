@@ -9,12 +9,12 @@ export default function PerksSection() {
       <div className="flex w-full justify-between gap-10 items-center flex-col md:flex-row">
         <SinglePerk
           image={orginize}
-          title="Stay Orginized"
+          title="Stay Organized"
           info="Keep track of all your job applications in one place"
         />
         <SinglePerk
           image={progress}
-          title="Track Prgoress"
+          title="Track Progress"
           info="Monitor your application status with visual boards"
         />
         <SinglePerk
