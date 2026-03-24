@@ -5,7 +5,7 @@ Organize your entire job search in one place — from first application to offer
 
 🔗 **[Live Demo](https://job-app-tracking.vercel.app/)**
 
-![Job Tracker Dashboard](./public/screenshot.png)
+![Job Tracker Dashboard](/screenshot.png)
 
 ---
 
