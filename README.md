@@ -46,7 +46,7 @@ Organize your entire job search in one place — from first application to offer
 ### Installation
 
 ```bash
-git clone https://github.com/your-username/job-tracker.git
+git clone https://github.com/p-glazowski/job-tracker.git
 cd job-tracker
 npm install
 ```
