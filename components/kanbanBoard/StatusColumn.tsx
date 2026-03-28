@@ -34,7 +34,7 @@ export default function StatusColumn({
     > */
     <section
       className={`shadow-[0px_0px_20px_0px] shadow-gray-400/50 rounded-md transition-colors ${isOver ? 'bg-gray-100' : ''}
-  border-l-2 ${border} min-w-[85vw] sm:min-w-90 lg:min-w-0 lg:w-full snap-center shrink-0`}
+  border-l-2 ${border} min-w-80  snap-center shrink-0 border-4`}
     >
       <div
         className={`p-4 ${color} font-bold text-white sticky top-0 z-10 rounded-t-md lg:relative`}

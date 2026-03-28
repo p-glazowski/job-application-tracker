@@ -120,7 +120,7 @@ export default function KanbanBoard({ initialJobs }: { initialJobs: Job[] }) {
       onDragEnd={handleDragEnd}
     >
       {/*      <div className="flex-1 grid grid-cols-1 max-w-600 mx-auto w-full lg:grid-cols-4 lg:p-8 lg:gap-10"> */}
-      <div className="w-full h-[calc(100dvh-64px)] lg:grid lg:grid-cols-4 lg:p-8 lg:gap-40 flex flex-row overflow-x-auto gap-10 p-4 snap-x snap-mandatory scroll-smooth pb-6 items-stretch">
+      <div className="w-full h-[calc(100dvh-64px)] lg:p-8 flex flex-row overflow-x-auto gap-10 p-4 snap-x snap-mandatory scroll-smooth pb-6 items-stretch border-4 max-w-625 mx-auto xl:grid xl:grid-cols-4">
         {COLUMNS.map((col) => (
           <StatusColumn
             key={col.id}
