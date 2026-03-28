@@ -12,7 +12,8 @@ import interview from '@/public/interview.svg';
 import applied from '@/public/applied.svg';
 import edit from '@/public/edit.svg';
 import { deleteJob, moveJob } from '@/actions/prismaActions';
-import { redirect } from 'next/navigation';
+import { useRouter } from 'next/navigation';
+import { Job } from '@/app/generated/prisma/client';
 
 export interface JobProps {
   company: string;
@@ -24,17 +25,22 @@ export interface JobProps {
   description: string | null;
   notes: string | null;
   id: string;
-  status: string;
+  status: 'applied' | 'interview' | 'offer' | 'rejected';
   appliedAt: Date;
   userId: string;
 }
 
-export default function SingleJob({ job }: { job: JobProps }) {
+interface Props {
+  job: Job;
+  onMoveJob?: (jobId: string, newStatus: string) => void;
+}
+
+export default function SingleJob({ job, onMoveJob }: Props) {
   const stack: string[] = job.tags.split(',');
   const [menu, setMenu] = useState(false);
   const [deleteMenu, setDeleteMenu] = useState(false);
-
   const menuRef = useRef<HTMLDivElement>(null);
+  const router = useRouter();
 
   useEffect(() => {
     function handleClickOutside(e: MouseEvent) {
@@ -43,18 +49,25 @@ export default function SingleJob({ job }: { job: JobProps }) {
         setDeleteMenu(false);
       }
     }
-
     document.addEventListener('mousedown', handleClickOutside);
-    return () => document.removeEventListener('mousedown', handleClickOutside); // ✅ cleanup
+    return () => document.removeEventListener('mousedown', handleClickOutside);
   }, []);
+
+  async function handleMove(
+    status: 'applied' | 'interview' | 'offer' | 'rejected',
+  ) {
+    await moveJob(job.id, status); // update DB
+    onMoveJob?.(job.id, status); // update local state instantly
+    setMenu(false);
+  }
 
   return (
     <Link
       href={`/dashboard/${job.id}`}
-      className="text-gray-500 bg-white p-6 rounded-md shadow-md shadow-gray-300 py-8 relative cursor-pointer hover:shadow-pink-500/30"
+      className="text-gray-500 bg-white p-6 rounded-md shadow-[0px_0px_10px_0px] shadow-gray-300 py-8 relative cursor-pointer hover:shadow-pink-500/30 block"
     >
       <div ref={menuRef} className="flex flex-col gap-3">
-        {/* DELETE CONF */}
+        {/* DELETE CONFIRMATION */}
         {deleteMenu && (
           <div
             className="absolute top-0 bottom-0 right-0 left-0 backdrop-blur-[2px] z-30 grid place-items-center p-4 bg-black/70 text-white rounded-md"
@@ -93,6 +106,7 @@ export default function SingleJob({ job }: { job: JobProps }) {
             </div>
           </div>
         )}
+
         {/* MENU */}
         {menu && (
           <div className="absolute top-5 right-15 z-20 bg-white rounded-md shadow-[0px_0px_10px_0px] shadow-gray-400/60">
@@ -112,12 +126,12 @@ export default function SingleJob({ job }: { job: JobProps }) {
                 onClick={(e) => {
                   e.stopPropagation();
                   e.preventDefault();
-                  moveJob(job.id, 'applied');
+                  handleMove('applied');
                 }}
               >
                 <Image
                   src={applied}
-                  alt="interview icon"
+                  alt="applied icon"
                   width={16}
                   height={16}
                   loading="eager"
@@ -131,7 +145,7 @@ export default function SingleJob({ job }: { job: JobProps }) {
                 onClick={(e) => {
                   e.stopPropagation();
                   e.preventDefault();
-                  moveJob(job.id, 'interview');
+                  handleMove('interview');
                 }}
               >
                 <Image
@@ -150,7 +164,7 @@ export default function SingleJob({ job }: { job: JobProps }) {
                 onClick={(e) => {
                   e.stopPropagation();
                   e.preventDefault();
-                  moveJob(job.id, 'offer');
+                  handleMove('offer');
                 }}
               >
                 <Image
@@ -163,13 +177,13 @@ export default function SingleJob({ job }: { job: JobProps }) {
                 <p className="text-xs">Offer</p>
               </button>
             )}
-            {job.status !== 'reject' && (
+            {job.status !== 'rejected' && (
               <button
                 className="flex gap-3 cursor-pointer p-2 px-3 hover:bg-pink-300/10 w-full items-center pl-6"
                 onClick={(e) => {
                   e.stopPropagation();
                   e.preventDefault();
-                  moveJob(job.id, 'rejected');
+                  handleMove('rejected');
                 }}
               >
                 <Image
@@ -187,12 +201,12 @@ export default function SingleJob({ job }: { job: JobProps }) {
               onClick={(e) => {
                 e.stopPropagation();
                 e.preventDefault();
-                redirect(`/dashboard/${job.id}/edit`);
+                router.push(`/dashboard/${job.id}/edit`);
               }}
             >
               <Image
                 src={edit}
-                alt="trash icon"
+                alt="edit icon"
                 width={16}
                 height={16}
                 loading="eager"
@@ -219,6 +233,7 @@ export default function SingleJob({ job }: { job: JobProps }) {
             </button>
           </div>
         )}
+
         <div className="flex flex-row justify-between">
           <div>
             <h3 className="text-black text-sm">{job.position}</h3>
@@ -241,17 +256,6 @@ export default function SingleJob({ job }: { job: JobProps }) {
             <StackBubble key={i}>{item}</StackBubble>
           ))}
         </div>
-        {/*       <div className="w-fit">
-        <Link href={job.jobUrl} target="_blank">
-          <Image
-            src={link}
-            alt="link icon"
-            width={16}
-            height={16}
-            className="opacity-60"
-          />
-        </Link>
-      </div> */}
       </div>
     </Link>
   );
