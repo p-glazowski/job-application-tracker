@@ -1,6 +1,6 @@
 'use client';
 
-import { useState } from 'react';
+import { useRef, useState } from 'react';
 import {
   DndContext,
   DragEndEvent,
@@ -16,6 +16,7 @@ import { Job } from '@/app/generated/prisma/client';
 import StatusColumn from './StatusColumn';
 import SingleJob from '../SingleJob/SingleJob';
 import { updateJobStatus } from '@/actions/prismaActions';
+import { useDragAutoScroll } from '@/hooks/useDragAutoScroll';
 
 const COLUMNS = [
   {
@@ -49,6 +50,8 @@ const VALID_STATUSES = ['applied', 'interview', 'offer', 'rejected'];
 export default function KanbanBoard({ initialJobs }: { initialJobs: Job[] }) {
   const [jobs, setJobs] = useState(initialJobs);
   const [activeJob, setActiveJob] = useState<Job | null>(null);
+  const boardRef = useRef<HTMLDivElement>(null);
+  useDragAutoScroll(boardRef, !!activeJob);
 
   const sensors = useSensors(
     useSensor(PointerSensor, {
@@ -120,7 +123,10 @@ export default function KanbanBoard({ initialJobs }: { initialJobs: Job[] }) {
       onDragEnd={handleDragEnd}
     >
       {/*      <div className="flex-1 grid grid-cols-1 max-w-600 mx-auto w-full lg:grid-cols-4 lg:p-8 lg:gap-10"> */}
-      <div className="w-full h-[calc(100dvh-64px)] lg:grid lg:grid-cols-4 lg:p-8 lg:gap-40 flex flex-row overflow-x-auto gap-10 p-4 snap-x snap-mandatory scroll-smooth pb-6 items-stretch">
+      <div
+        ref={boardRef}
+        className="w-full h-[calc(100dvh-64px)] lg:p-8 flex flex-row overflow-x-auto gap-10 p-4 pb-6 items-stretch max-w-625 mx-auto xl:grid xl:grid-cols-4"
+      >
         {COLUMNS.map((col) => (
           <StatusColumn
             key={col.id}

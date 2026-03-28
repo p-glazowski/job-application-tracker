@@ -24,6 +24,7 @@ export default function SortableJobCard({ job, onMoveJob }: Props) {
     transform: CSS.Transform.toString(transform),
     transition,
     opacity: isDragging ? 0.4 : 1,
+    touchAction: 'none',
   };
 
   return (
