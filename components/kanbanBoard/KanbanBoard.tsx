@@ -125,7 +125,7 @@ export default function KanbanBoard({ initialJobs }: { initialJobs: Job[] }) {
       {/*      <div className="flex-1 grid grid-cols-1 max-w-600 mx-auto w-full lg:grid-cols-4 lg:p-8 lg:gap-10"> */}
       <div
         ref={boardRef}
-        className="w-full h-[calc(100dvh-64px)] lg:p-8 flex flex-row overflow-x-auto gap-10 p-4 pb-6 items-stretch max-w-625 mx-auto xl:grid xl:grid-cols-4"
+        className="w-full min-h-[calc(100dvh-64px)] lg:p-8 flex flex-row overflow-x-auto gap-10 p-4 pb-6 items-stretch max-w-625 mx-auto xl:grid xl:grid-cols-4"
       >
         {COLUMNS.map((col) => (
           <StatusColumn
