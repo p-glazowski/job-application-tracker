@@ -127,7 +127,7 @@ export default async function EditForm({ id }: Props) {
         {/* BUTTONS */}
         <div className="flex justify-end gap-3">
           <div>
-            <SubmitButton loading="Editing...">Edit Application</SubmitButton>
+            <SubmitButton loading="Editing...">Save Application</SubmitButton>
           </div>
         </div>
       </form>

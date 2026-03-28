@@ -78,3 +78,13 @@ export async function updateJob(id: string, formData: FormData) {
   await prisma.job.update({ where: { id: id }, data: myData });
   redirect(`/dashboard/${id}`);
 }
+
+export async function updateJobStatus(jobId: string, status: string) {
+  const session = await auth();
+  if (!session) throw new Error('Unauthorized');
+
+  await prisma.job.update({
+    where: { id: jobId, userId: session?.user?.id },
+    data: { status: status as any },
+  });
+}
