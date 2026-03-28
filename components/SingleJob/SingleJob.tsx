@@ -14,6 +14,8 @@ import edit from '@/public/edit.svg';
 import { deleteJob, moveJob } from '@/actions/prismaActions';
 import { useRouter } from 'next/navigation';
 import { Job } from '@/app/generated/prisma/client';
+import { AnimatePresence } from 'motion/react';
+import { motion } from 'motion/react';
 
 export interface JobProps {
   company: string;
@@ -108,132 +110,139 @@ export default function SingleJob({ job, onMoveJob }: Props) {
         )}
 
         {/* MENU */}
-        {menu && (
-          <div className="absolute top-5 right-15 z-20 bg-white rounded-md shadow-[0px_0px_10px_0px] shadow-gray-400/60">
-            <button className="flex gap-3 p-2 px-3 w-full items-center">
-              <Image
-                src={move}
-                alt="move to icon"
-                width={16}
-                height={16}
-                loading="eager"
-              />
-              <p className="text-xs">Move to</p>
-            </button>
-            {job.status !== 'applied' && (
-              <button
-                className="flex gap-3 cursor-pointer p-2 px-3 hover:bg-pink-300/10 w-full items-center pl-6"
-                onClick={(e) => {
-                  e.stopPropagation();
-                  e.preventDefault();
-                  handleMove('applied');
-                }}
-              >
-                <Image
-                  src={applied}
-                  alt="applied icon"
-                  width={16}
-                  height={16}
-                  loading="eager"
-                />
-                <p className="text-xs">Applied</p>
-              </button>
-            )}
-            {job.status !== 'interview' && (
-              <button
-                className="flex gap-3 cursor-pointer p-2 px-3 hover:bg-pink-300/10 w-full items-center pl-6"
-                onClick={(e) => {
-                  e.stopPropagation();
-                  e.preventDefault();
-                  handleMove('interview');
-                }}
-              >
-                <Image
-                  src={interview}
-                  alt="interview icon"
-                  width={16}
-                  height={16}
-                  loading="eager"
-                />
-                <p className="text-xs">Interview</p>
-              </button>
-            )}
-            {job.status !== 'offer' && (
-              <button
-                className="flex gap-3 cursor-pointer p-2 px-3 hover:bg-pink-300/10 w-full items-center pl-6"
-                onClick={(e) => {
-                  e.stopPropagation();
-                  e.preventDefault();
-                  handleMove('offer');
-                }}
-              >
-                <Image
-                  src={offer}
-                  alt="offer icon"
-                  width={16}
-                  height={16}
-                  loading="eager"
-                />
-                <p className="text-xs">Offer</p>
-              </button>
-            )}
-            {job.status !== 'rejected' && (
-              <button
-                className="flex gap-3 cursor-pointer p-2 px-3 hover:bg-pink-300/10 w-full items-center pl-6"
-                onClick={(e) => {
-                  e.stopPropagation();
-                  e.preventDefault();
-                  handleMove('rejected');
-                }}
-              >
-                <Image
-                  src={reject}
-                  alt="reject icon"
-                  width={16}
-                  height={16}
-                  loading="eager"
-                />
-                <p className="text-xs">Rejected</p>
-              </button>
-            )}
-            <button
-              className="flex gap-3 cursor-pointer p-2 px-3 hover:bg-pink-300/10 w-full"
-              onClick={(e) => {
-                e.stopPropagation();
-                e.preventDefault();
-                router.push(`/dashboard/${job.id}/edit`);
-              }}
+        <AnimatePresence>
+          {menu && (
+            <motion.div
+              initial={{ opacity: 0, y: 10 }}
+              animate={{ opacity: 1, y: 0 }}
+              exit={{ opacity: 0, y: -10 }}
+              transition={{ duration: 0.25, ease: 'easeInOut' }}
+              className="absolute top-5 right-15 z-20 bg-white rounded-md shadow-[0px_0px_10px_0px] shadow-gray-400/60"
             >
-              <Image
-                src={edit}
-                alt="edit icon"
-                width={16}
-                height={16}
-                loading="eager"
-              />
-              <p className="text-xs">Edit Job</p>
-            </button>
-            <button
-              className="flex gap-3 cursor-pointer p-2 px-3 hover:bg-pink-300/10 w-full"
-              onClick={(e) => {
-                e.stopPropagation();
-                e.preventDefault();
-                setMenu(false);
-                setDeleteMenu(true);
-              }}
-            >
-              <Image
-                src={trash}
-                alt="trash icon"
-                width={16}
-                height={16}
-                loading="eager"
-              />
-              <p className="text-xs">Delete Job</p>
-            </button>
-          </div>
-        )}
-
+              <button className="flex gap-3 p-2 px-3 w-full items-center">
+                <Image
+                  src={move}
+                  alt="move to icon"
+                  width={16}
+                  height={16}
+                  loading="eager"
+                />
+                <p className="text-xs">Move to</p>
+              </button>
+              {job.status !== 'applied' && (
+                <button
+                  className="flex gap-3 cursor-pointer p-2 px-3 hover:bg-pink-300/10 w-full items-center pl-6"
+                  onClick={(e) => {
+                    e.stopPropagation();
+                    e.preventDefault();
+                    handleMove('applied');
+                  }}
+                >
+                  <Image
+                    src={applied}
+                    alt="applied icon"
+                    width={16}
+                    height={16}
+                    loading="eager"
+                  />
+                  <p className="text-xs">Applied</p>
+                </button>
+              )}
+              {job.status !== 'interview' && (
+                <button
+                  className="flex gap-3 cursor-pointer p-2 px-3 hover:bg-pink-300/10 w-full items-center pl-6"
+                  onClick={(e) => {
+                    e.stopPropagation();
+                    e.preventDefault();
+                    handleMove('interview');
+                  }}
+                >
+                  <Image
+                    src={interview}
+                    alt="interview icon"
+                    width={16}
+                    height={16}
+                    loading="eager"
+                  />
+                  <p className="text-xs">Interview</p>
+                </button>
+              )}
+              {job.status !== 'offer' && (
+                <button
+                  className="flex gap-3 cursor-pointer p-2 px-3 hover:bg-pink-300/10 w-full items-center pl-6"
+                  onClick={(e) => {
+                    e.stopPropagation();
+                    e.preventDefault();
+                    handleMove('offer');
+                  }}
+                >
+                  <Image
+                    src={offer}
+                    alt="offer icon"
+                    width={16}
+                    height={16}
+                    loading="eager"
+                  />
+                  <p className="text-xs">Offer</p>
+                </button>
+              )}
+              {job.status !== 'rejected' && (
+                <button
+                  className="flex gap-3 cursor-pointer p-2 px-3 hover:bg-pink-300/10 w-full items-center pl-6"
+                  onClick={(e) => {
+                    e.stopPropagation();
+                    e.preventDefault();
+                    handleMove('rejected');
+                  }}
+                >
+                  <Image
+                    src={reject}
+                    alt="reject icon"
+                    width={16}
+                    height={16}
+                    loading="eager"
+                  />
+                  <p className="text-xs">Rejected</p>
+                </button>
+              )}
+              <button
+                className="flex gap-3 cursor-pointer p-2 px-3 hover:bg-pink-300/10 w-full"
+                onClick={(e) => {
+                  e.stopPropagation();
+                  e.preventDefault();
+                  router.push(`/dashboard/${job.id}/edit`);
+                }}
+              >
+                <Image
+                  src={edit}
+                  alt="edit icon"
+                  width={16}
+                  height={16}
+                  loading="eager"
+                />
+                <p className="text-xs">Edit Job</p>
+              </button>
+              <button
+                className="flex gap-3 cursor-pointer p-2 px-3 hover:bg-pink-300/10 w-full"
+                onClick={(e) => {
+                  e.stopPropagation();
+                  e.preventDefault();
+                  setMenu(false);
+                  setDeleteMenu(true);
+                }}
+              >
+                <Image
+                  src={trash}
+                  alt="trash icon"
+                  width={16}
+                  height={16}
+                  loading="eager"
+                />
+                <p className="text-xs">Delete Job</p>
+              </button>
+            </motion.div>
+          )}
+        </AnimatePresence>
         <div className="flex flex-row justify-between">
           <div>
             <h3 className="text-black text-sm">{job.position}</h3>
