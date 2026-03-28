@@ -11,12 +11,12 @@ import {
   useSensor,
   useSensors,
   TouchSensor,
-  AutoScrollActivator,
 } from '@dnd-kit/core';
 import { Job } from '@/app/generated/prisma/client';
 import StatusColumn from './StatusColumn';
 import SingleJob from '../SingleJob/SingleJob';
 import { updateJobStatus } from '@/actions/prismaActions';
+import { useDragAutoScroll } from '@/hooks/useDragAutoScroll';
 
 const COLUMNS = [
   {
@@ -51,6 +51,7 @@ export default function KanbanBoard({ initialJobs }: { initialJobs: Job[] }) {
   const [jobs, setJobs] = useState(initialJobs);
   const [activeJob, setActiveJob] = useState<Job | null>(null);
   const boardRef = useRef<HTMLDivElement>(null);
+  useDragAutoScroll(boardRef, !!activeJob);
 
   const sensors = useSensors(
     useSensor(PointerSensor, {
@@ -120,17 +121,11 @@ export default function KanbanBoard({ initialJobs }: { initialJobs: Job[] }) {
       collisionDetection={closestCorners}
       onDragStart={handleDragStart}
       onDragEnd={handleDragEnd}
-      autoScroll={{
-        activator: AutoScrollActivator.Pointer, // scroll when pointer is near edge
-        threshold: { x: 0.15, y: 0.15 }, // trigger within 15% of the edge
-        acceleration: 10, // scroll speed
-        interval: 5, // ms between scroll steps
-      }}
     >
       {/*      <div className="flex-1 grid grid-cols-1 max-w-600 mx-auto w-full lg:grid-cols-4 lg:p-8 lg:gap-10"> */}
       <div
         ref={boardRef}
-        className="w-full h-[calc(100dvh-64px)] lg:p-8 flex flex-row overflow-x-auto gap-10 p-4 scroll-smooth pb-6 items-stretch max-w-625 mx-auto xl:grid xl:grid-cols-4"
+        className="w-full h-[calc(100dvh-64px)] lg:p-8 flex flex-row overflow-x-auto gap-10 p-4 pb-6 items-stretch max-w-625 mx-auto xl:grid xl:grid-cols-4"
       >
         {COLUMNS.map((col) => (
           <StatusColumn
